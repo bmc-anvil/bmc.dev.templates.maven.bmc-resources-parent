@@ -41,36 +41,33 @@
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <maven.compiler.release>25</maven.compiler.release>
         <maven.compiler.proc>full</maven.compiler.proc>
-        <maven.min.version>3.9.9</maven.min.version>
+        <maven.min.version>3.9.12</maven.min.version>
 
         <!-- Plugins Versions  -->
         <plugin.checkstyle.version>3.6.0</plugin.checkstyle.version>
         <plugin.jacoco.version>0.8.14</plugin.jacoco.version>
-        <plugin.maven.compiler.version>3.14.0</plugin.maven.compiler.version>
+        <plugin.maven.compiler.version>3.15.0</plugin.maven.compiler.version>
         <plugin.maven.deploy.version>3.1.4</plugin.maven.deploy.version>
         <plugin.maven.enforcer.version>3.6.2</plugin.maven.enforcer.version>
-        <plugin.maven.jar.version>3.4.2</plugin.maven.jar.version>
+        <plugin.maven.jar.version>3.5.0</plugin.maven.jar.version>
         <plugin.maven.javadoc.version>3.12.0</plugin.maven.javadoc.version>
-        <plugin.maven.source.version>3.3.1</plugin.maven.source.version>
-        <plugin.maven.surefire.version>3.5.4</plugin.maven.surefire.version>
+        <plugin.maven.resource.version>3.5.0</plugin.maven.resource.version>
+        <plugin.maven.source.version>3.4.0</plugin.maven.source.version>
+        <plugin.maven.surefire.version>3.5.5</plugin.maven.surefire.version>
 
         <!-- Maven Plugins Creation Versions  -->
-        <!-- NOTE:
-              Maven-plugin-plugin 3.13.1, latest for maven 3.9.9, supports bytecode up to version 67 - jdk 23.
-              When updating this plugin, check for dependent projects and update the maven-compiler version accordingly.
-         -->
-        <maven.core.version>3.9.9</maven.core.version>
-        <maven.plugin.api.version>3.9.9</maven.plugin.api.version>
-        <maven.plugin.plugin.version>3.13.1</maven.plugin.plugin.version>
-        <maven.plugin.tools.plugin.annotations.version>3.13.1</maven.plugin.tools.plugin.annotations.version>
+        <maven.core.version>3.9.13</maven.core.version>
+        <maven.plugin.api.version>3.9.13</maven.plugin.api.version>
+        <maven.plugin.plugin.version>3.15.2</maven.plugin.plugin.version>
+        <maven.plugin.tools.plugin.annotations.version>3.15.2</maven.plugin.tools.plugin.annotations.version>
 
         <!-- Versions -->
         <apache.commons.collections.version>4.5.0</apache.commons.collections.version>
-        <apache.commons.lang3.version>3.19.0</apache.commons.lang3.version>
-        <checkstyle.version>12.1.0</checkstyle.version>
-        <junit.bom.version>5.13.4</junit.bom.version>
+        <apache.commons.lang3.version>3.20.0</apache.commons.lang3.version>
+        <checkstyle.version>13.3.0</checkstyle.version>
+        <junit.bom.version>6.0.3</junit.bom.version>
         <lombok.version>1.18.42</lombok.version>
-        <mockito.bom.version>5.20.0</mockito.bom.version>
+        <mockito.bom.version>5.22.0</mockito.bom.version>
         <slf4j.simple.version>1.7.36</slf4j.simple.version>
     </properties>
 
@@ -165,7 +162,7 @@
             </dependency>
 
             <!-- Maven Plugin Creation Dependencies -->
-            <!-- The scope for must be "provided"-->
+            <!-- The scope must be "provided"-->
             <dependency>
                 <groupId>org.apache.maven</groupId>
                 <artifactId>maven-core</artifactId>
@@ -189,7 +186,7 @@
                  We only need this for test as maven-core et als bring it to production code.
                  For this to correctly bind to SLF4J, it has to match the same version of any other implementation already present,
                  and maven brings the one below.
-                 Update the version if maven updates its version
+                 Update the version if maven pom (track it from maven-core pom) updates its version
                  Simple outputs to system.err, so all logs will be red.
             -->
             <dependency>
@@ -361,6 +358,11 @@
                     <configuration>
                         <attach>true</attach>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${plugin.maven.resource.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
